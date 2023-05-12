@@ -6,7 +6,16 @@
         xmlns:local="clr-namespace:DBW.WPFClient"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <DataGrid VirtualizingStackPanel.IsVirtualizing="True"
+              VirtualizingStackPanel.VirtualizationMode="Recycling"
+              ScrollViewer.CanContentScroll="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+            <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa}" />
+            <DataGridTextColumn Header="Id nadrzędny" Binding="{Binding IdNadrzedny}" />
+            <DataGridTextColumn Header="Id poziomu" Binding="{Binding IdPoziom}" />
+            <DataGridTextColumn Header="Nazwa poziomu" Binding="{Binding NazwaPoziom}" />
+            <DataGridTextColumn Header="Czy zmienne?" Binding="{Binding CzyZmienne}" />
+        </DataGrid.Columns>
+    </DataGrid>
 </Window>
