@@ -24,11 +24,6 @@ namespace DBW.WPFClient
         public MainWindow()
         {
             InitializeComponent();
-            MessageBox.Show("XD");
-            AreaService areaService = new AreaService();
-            var ressult =   areaService.GetElementsAsync().Result;
-            var xd = ressult.Count;
-            MessageBox.Show(xd.ToString());
         }
     }
 }

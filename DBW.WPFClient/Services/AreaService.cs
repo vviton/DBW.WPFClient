@@ -18,18 +18,18 @@ namespace DBW.WPFClient.Services
         {
             _httpClient = new HttpClient();
         }
-        public async Task<List<Area>> GetElementsAsync()
+        public async Task<List<Area>> GetAreasAsync()
         {
-            List<Area> elements = new List<Area>();
+            List<Area> areas = new List<Area>();
 
             HttpResponseMessage response = await _httpClient.GetAsync(_apiUrl);
 
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
-                elements = JsonConvert.DeserializeObject<List<Area>>(json);
+                areas = JsonConvert.DeserializeObject<List<Area>>(json);
             }
-            return elements;
+            return areas;
         }
     }
 }

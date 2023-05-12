@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBW.WPFClient
 {
-    internal class MainWindowViewModel
+    internal class AreaViewModel
     {
     }
 }
