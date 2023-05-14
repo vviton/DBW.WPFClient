@@ -15,14 +15,14 @@
               IsReadOnly="False"
               ItemsSource="{Binding Areas}"
               SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
-              
+              CellEditEnding="OnCellEditEnding"
               Name="dbwDataGrid">
         <DataGrid.Columns>
             <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
             <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}"/>
             <DataGridTextColumn Header="Id nadrzędny" Binding="{Binding ParentId}"/>
             <DataGridTextColumn Header="Id poziomu" Binding="{Binding LevelId}"/>
-            <DataGridTextColumn Header="Nazwa poziomu" Binding="{Binding LevelName,UpdateSourceTrigger=LostFocus,Mode=TwoWay}"/>
+            <DataGridTextColumn Header="Nazwa poziomu" Binding="{Binding LevelName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
             <DataGridTextColumn Header="Czy zmienne?" Binding="{Binding Changeable}"/>
         </DataGrid.Columns>
     </DataGrid>

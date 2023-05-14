@@ -18,11 +18,23 @@ namespace DBW.WPFClient
     public class AreaViewModel : INotifyPropertyChanged
     {
         private readonly AreaService _areaService;
+        private readonly MainWindow _mainWindow;
 
         private ObservableCollection<Area> _areas;
-
-        public ICommand CellEditEndingCommand { get; private set; }
-        private void _editAreaCommand() { }
+        private Area _selectedArea;
+        public Area SelectedArea
+        {
+            get => _selectedArea;
+            set
+            {
+                if (_selectedArea != value)
+                {
+                    _selectedArea = value;
+                    OnPropertyChanged(nameof(SelectedArea));
+                    
+                }
+            }
+        }
         public AreaViewModel(AreaService areaService)
         {
             _areaService = areaService;

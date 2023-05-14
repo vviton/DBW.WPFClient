@@ -48,10 +48,10 @@ namespace DBW.WPFClient
         private void OnCellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             var editedArea = e.Row.Item as Area;
-            MessageBox.Show(editedArea.Id.ToString());
             if (editedArea != null)
             {
                 UpdateRowColor(editedArea);
+                MessageBox.Show(editedArea.LevelName + " " + editedArea.Name + " " + editedArea.Id);
             }
         }
         private void UpdateRowColor(Area area)
