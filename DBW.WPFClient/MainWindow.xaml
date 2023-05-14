@@ -8,14 +8,15 @@
         Title="MainWindow" Height="450" Width="800">
     <DataGrid VirtualizingStackPanel.IsVirtualizing="True"
               VirtualizingStackPanel.VirtualizationMode="Recycling"
-              ScrollViewer.CanContentScroll="True">
+              ScrollViewer.CanContentScroll="True"
+              ItemsSource="{Binding Areas}">
         <DataGrid.Columns>
             <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
-            <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa}" />
-            <DataGridTextColumn Header="Id nadrzędny" Binding="{Binding IdNadrzedny}" />
-            <DataGridTextColumn Header="Id poziomu" Binding="{Binding IdPoziom}" />
-            <DataGridTextColumn Header="Nazwa poziomu" Binding="{Binding NazwaPoziom}" />
-            <DataGridTextColumn Header="Czy zmienne?" Binding="{Binding CzyZmienne}" />
+            <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" />
+            <DataGridTextColumn Header="Id nadrzędny" Binding="{Binding ParentId}" />
+            <DataGridTextColumn Header="Id poziomu" Binding="{Binding LevelId}" />
+            <DataGridTextColumn Header="Nazwa poziomu" Binding="{Binding LevelName}" />
+            <DataGridTextColumn Header="Czy zmienne?" Binding="{Binding Changeable}" />
         </DataGrid.Columns>
     </DataGrid>
 </Window>

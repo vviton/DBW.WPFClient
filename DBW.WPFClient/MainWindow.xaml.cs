@@ -21,9 +21,18 @@ namespace DBW.WPFClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly AreaViewModel _viewModel;
         public MainWindow()
         {
             InitializeComponent();
+            _viewModel = new AreaViewModel(new AreaService());
+            Loaded += OnLoaded;
+            DataContext = _viewModel;
+
+        }
+        private async void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            await _viewModel.LoadAreasAsync();
         }
     }
 }
