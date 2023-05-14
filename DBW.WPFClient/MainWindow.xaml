@@ -6,28 +6,25 @@
         xmlns:local="clr-namespace:DBW.WPFClient"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="dbwDataGridStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+
 
     <DataGrid VirtualizingStackPanel.IsVirtualizing="True"
               VirtualizingStackPanel.VirtualizationMode="Recycling"
               ScrollViewer.CanContentScroll="True"
               AutoGenerateColumns="False"
+              IsReadOnly="False"
               ItemsSource="{Binding Areas}"
-              Style="{StaticResource dbwDataGridStyle}"
+              SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
+              
               Name="dbwDataGrid">
         <DataGrid.Columns>
             <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
             <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}"/>
             <DataGridTextColumn Header="Id nadrzędny" Binding="{Binding ParentId}"/>
             <DataGridTextColumn Header="Id poziomu" Binding="{Binding LevelId}"/>
-            <DataGridTextColumn Header="Nazwa poziomu" Binding="{Binding LevelName}"/>
+            <DataGridTextColumn Header="Nazwa poziomu" Binding="{Binding LevelName,UpdateSourceTrigger=LostFocus,Mode=TwoWay}"/>
             <DataGridTextColumn Header="Czy zmienne?" Binding="{Binding Changeable}"/>
         </DataGrid.Columns>
     </DataGrid>
+    
 </Window>

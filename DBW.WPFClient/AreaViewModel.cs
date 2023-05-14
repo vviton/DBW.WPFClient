@@ -1,5 +1,6 @@
 ﻿using DBW.WPFClient.Models;
 using DBW.WPFClient.Services;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,20 +8,26 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace DBW.WPFClient
 {
     public class AreaViewModel : INotifyPropertyChanged
     {
         private readonly AreaService _areaService;
+
         private ObservableCollection<Area> _areas;
 
+        public ICommand CellEditEndingCommand { get; private set; }
+        private void _editAreaCommand() { }
         public AreaViewModel(AreaService areaService)
         {
             _areaService = areaService;
             _areas = new();
         }
-
         public ObservableCollection<Area> Areas
         {
             get { return _areas; }
@@ -39,7 +46,7 @@ namespace DBW.WPFClient
             _areas.Clear();
             areas.ForEach(area => _areas.Add(area));
         }
-
+  
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

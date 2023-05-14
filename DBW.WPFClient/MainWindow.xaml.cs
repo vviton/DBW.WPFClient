@@ -36,27 +36,46 @@ namespace DBW.WPFClient
             await _viewModel.LoadAreasAsync();
             dbwDataGrid.LoadingRow += OnDataGridLoadingRow;
         }
+
         private void OnDataGridLoadingRow(object sender, DataGridRowEventArgs e)
         {
             var area = e.Row.DataContext as Area;
             if (area != null)
             {
-                switch (area.LevelName)
-                {
-                    case "Temat":
-                        e.Row.Background = Brushes.Green;
-                        break;
-                    case "Zakres informacyjny":
-                        e.Row.Background = Brushes.Red;
-                        break;
-                    case "Dziedzina":
-                        e.Row.Background = Brushes.Yellow;
-                        break;
-                    default:
-                        e.Row.Background = Brushes.Transparent;
-                        break;
-                }
+                UpdateRowColor(area);
+            }
+        }
+        private void OnCellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            var editedArea = e.Row.Item as Area;
+            MessageBox.Show(editedArea.Id.ToString());
+            if (editedArea != null)
+            {
+                UpdateRowColor(editedArea);
+            }
+        }
+        private void UpdateRowColor(Area area)
+        {
+            var row = (DataGridRow) dbwDataGrid.ItemContainerGenerator.ContainerFromItem(area);
+            if (row == null) return;
+
+            switch (area.LevelName)
+            {
+                case "Temat":
+                    row.Background = Brushes.Green;
+                    break;
+                case "Zakres informacyjny":
+                    row.Background = Brushes.Red;
+                    break;
+                case "Dziedzina":
+                    row.Background = Brushes.Yellow;
+                    break;
+                default:
+                    row.Background = Brushes.Transparent;
+                    break;
             }
         }
     }
-}
+       
+        }
+ 
