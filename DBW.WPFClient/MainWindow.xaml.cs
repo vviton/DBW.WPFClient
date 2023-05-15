@@ -51,7 +51,6 @@ namespace DBW.WPFClient
             if (editedArea != null)
             {
                 UpdateRowColor(editedArea);
-                MessageBox.Show(editedArea.LevelName + " " + editedArea.Name + " " + editedArea.Id);
             }
         }
         private void UpdateRowColor(Area area)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DBW.WPFClient.Services
 {
-    public class AreaService
+    public class AreaService : IAreaService
     {
         private readonly HttpClient _httpClient;
         private readonly string _apiUrl = "https://api-dbw.stat.gov.pl/api/1.1.0/area/area-area";

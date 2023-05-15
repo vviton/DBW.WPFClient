@@ -31,7 +31,6 @@ namespace DBW.WPFClient
                 {
                     _selectedArea = value;
                     OnPropertyChanged(nameof(SelectedArea));
-                    
                 }
             }
         }
