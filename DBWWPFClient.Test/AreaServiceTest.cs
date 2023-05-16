@@ -17,16 +17,13 @@ namespace DBWWPFClient.Test
         {
             // Arrange
             var areasJson = "[{\"id\":1,\"nazwa\":\"Ceny\",\"id-nadrzedny-elemment\":727,\"id-poziom\":1,\"nazwa-poziom\":\"Dziedzina\",\"czy-zmienne\":false}]";
-            var handlerMock = new Mock<HttpMessageHandler>();
-            handlerMock.Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(new HttpResponseMessage()
+            ConfigureHttpClientSendAsyncAndJsonResponse(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.OK,
                     Content = new StringContent(areasJson),
-                });
-            var httpClient = new HttpClient(handlerMock.Object);
-            IAreaService areaService = new AreaService(httpClient);
+                },areasJson);
+            
+            IAreaService areaService = new AreaService(_httpClient);
 
             // Act
             var result = await areaService.GetAreasAsync();
@@ -37,12 +34,12 @@ namespace DBWWPFClient.Test
         [Fact]
         public async Task GetAreasAsync_Should_Return_List_With_Correct_Count_After_Successful_ApiCall()
         {
-        var areasJson = "["+
-    "  {\"id\":1,\"nazwa\":\"Ceny\",\"id-nadrzedny-element\":727,\"id-poziom\":1,\"nazwa-poziom\":\"Dziedzina\",\"czy-zmienne\":false}," +
-    "  {\"id\":4,\"nazwa\":\"Budownictwo\",\"id-nadrzedny-element\":727,\"id-poziom\":1,\"nazwa-poziom\":\"Dziedzina\",\"czy-zmienne\":false}," +
-    "  {\"id\":29,\"nazwa\":\"Finanse publiczne\",\"id-nadrzedny-element\":727,\"id-poziom\":1,\"nazwa-poziom\":\"Dziedzina\",\"czy-zmienne\":false}," +
-    "  {\"id\":32,\"nazwa\":\"Gospodarka morska i œródl¹dowa\",\"id-nadrzedny-element\":727,\"id-poziom\":1,\"nazwa-poziom\":\"Dziedzina\",\"czy-zmienne\":false}\n" +
-    "]";
+            var areasJson = "[" +
+        "  {\"id\":1,\"nazwa\":\"Ceny\",\"id-nadrzedny-element\":727,\"id-poziom\":1,\"nazwa-poziom\":\"Dziedzina\",\"czy-zmienne\":false}," +
+        "  {\"id\":4,\"nazwa\":\"Budownictwo\",\"id-nadrzedny-element\":727,\"id-poziom\":1,\"nazwa-poziom\":\"Dziedzina\",\"czy-zmienne\":false}," +
+        "  {\"id\":29,\"nazwa\":\"Finanse publiczne\",\"id-nadrzedny-element\":727,\"id-poziom\":1,\"nazwa-poziom\":\"Dziedzina\",\"czy-zmienne\":false}," +
+        "  {\"id\":32,\"nazwa\":\"Gospodarka morska i œródl¹dowa\",\"id-nadrzedny-element\":727,\"id-poziom\":1,\"nazwa-poziom\":\"Dziedzina\",\"czy-zmienne\":false}\n" +
+        "]";
             ConfigureHttpClientSendAsyncAndJsonResponse(new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.OK,
@@ -85,7 +82,7 @@ namespace DBWWPFClient.Test
             ConfigureHttpClientSendAsync(
                 new HttpResponseMessage
                 {
-                  StatusCode = HttpStatusCode.InternalServerError 
+                    StatusCode = HttpStatusCode.InternalServerError
                 }
                 );
 
@@ -102,7 +99,7 @@ namespace DBWWPFClient.Test
             handlerMock.Protected()
                 .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
                 .ReturnsAsync(message);
-             _httpClient = new HttpClient(handlerMock.Object);
+            _httpClient = new HttpClient(handlerMock.Object);
         }
         private void ConfigureHttpClientSendAsync(HttpResponseMessage message)
         {
