@@ -1,5 +1,6 @@
 ﻿using DBW.WPFClient.Converters;
 using DBW.WPFClient.Models;
+using DBW.WPFClient.Repository;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,32 +13,21 @@ namespace DBW.WPFClient.Services
 {
     public class AreaService : IAreaService
     {
-        private readonly HttpClient _httpClient;
-        private readonly IAreaConverter _areaConverter;
-        private readonly string _apiUrl = "https://api-dbw.stat.gov.pl/api/1.1.0/area/area-area";
+        IRepository<Area> _repository;
 
         public AreaService(HttpClient httpClient)
         {
-            _httpClient = httpClient;
-            _areaConverter = new AreaJsonConverter();
+            _repository = new AreaApiRepository(httpClient);
         }
 
         public AreaService()
         {
-            _httpClient = new HttpClient();
-            _areaConverter = new AreaJsonConverter();
+            var httpClient = new HttpClient();
+            _repository = new AreaApiRepository(httpClient);
         }
         public async Task<List<Area>> GetAreasAsync()
         {
-            List<Area> areas = new List<Area>();
-
-            HttpResponseMessage response = await _httpClient.GetAsync(_apiUrl);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var json = await response.Content.ReadAsStringAsync();
-                areas = _areaConverter.ConvertToListOfAreas(json);
-            }
+            var areas = await _repository.GetAllAsync();
             return areas;
         }
 
