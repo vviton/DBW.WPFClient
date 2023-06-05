@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace DBW.WPFClient.Helpers
+namespace DBW.WPFClient.Converters
 {
     public class BoolToTakNieConverter : IValueConverter
     {
